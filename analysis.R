@@ -67,13 +67,15 @@ m2.3 <- glmer(key_press ~ condition + size0 + trial0 + trial0:size0 + condition:
 m3   <- glmer(key_press ~ condition * size0 * trial0 + (trial0|subject), family='binomial', data=d, glmerControl(optimizer = 'bobyqa'))
 
 # * Test model significance ####
-anova(m0.1, glm0) # Is random intercepts sig.? Yes 
-anova(m0.2, m0.1) # Is random slopes sig.? Yes
-anova(m1, m0.2)   # Are presence of main effects sig.? Yes
-anova(m2.1, m1)   # Is interaction between trial0 and size0 sig.? No
-anova(m2.2, m2.1) # Is interaction between trial0 and condition sig. Yes
-anova(m2.3, m2.2) # Is interaction between condition and size0 sig.? Yes
-anova(m2.3, m3)   # Is interaction between condition, trial0, and size0 sig. Yes
+# anova(m0.1, glm0) # Is random intercepts sig.? Yes 
+# anova(m0.2, m0.1) # Is random slopes sig.? Yes
+# anova(m1, m0.2)   # Are presence of main effects sig.? Yes
+# anova(m2.1, m1)   # Is interaction between trial0 and size0 sig.? No
+# anova(m2.2, m2.1) # Is interaction between trial0 and condition sig. Yes
+# anova(m2.3, m2.2) # Is interaction between condition and size0 sig.? Yes
+# anova(m2.3, m3)   # Is interaction between condition, trial0, and size0 sig. Yes
+
+anova(m0.1, m0.2, m1, m2.1, m2.2, m2.3, m3, glm0) 
 
 # Make a nicely formatted regression table of most complex model with sjPlot
 tab_model(m3, 
